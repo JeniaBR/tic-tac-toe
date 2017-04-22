@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1080px;
+  margin: auto;
+  background: yellowgreen;
+}
+
+.board-container {
+  width: 720px;
+  height: 720px;
+  background: grey;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.tile {
+  width: 230px;
+  height: 230px;
+  border-radius: 5px;
+  background-color: #78bec5;
+}
