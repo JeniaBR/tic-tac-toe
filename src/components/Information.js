@@ -2,11 +2,13 @@ import React from 'react';
 
 const Information = (props) => {
   return(
-    <ul>
-      <li>Players Score</li>
-      <li>Computer Score</li>
-      <li>Draws</li>
-    </ul>
+    <div className="info-container">
+      <ul>
+        <li>Players Score</li>
+        <li>Computer Score</li>
+        <li>Draws</li>
+      </ul>
+    </div>
   );
 }
 
