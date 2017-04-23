@@ -5,14 +5,23 @@ class Board extends Component {
   constructor(props){
     super(props);
     this.state = {
-      game: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      player: 'X',
-      computer: 'O'
+      game: true,
+      gameState: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      playerVal: -1,
+      computerVal: 1,
+      player: false,
+      computer: true
     }
   }
 
-  handleClick = () => {
+  handleReset = () => {
+    this.setState({
+      gameState: [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    });
+  }
 
+  handleClick = (clicked) => {
+    console.log(clicked);
   }
 
   render(){

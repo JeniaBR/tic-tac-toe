@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Tile = (props) => {
   return(
-    <div className='tile'></div>
+    <div onClick={props.onClick.bind(this, props.id)} className='tile'></div>
   );
 }
 
