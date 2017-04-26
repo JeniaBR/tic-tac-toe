@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 
 const Tile = (props) => {
   return(
-    <div onClick={props.onClick.bind(this, props.id)} className='tile'></div>
+    <div onClick={props.onClick} className='tile'>
+      {props.value === 0 ? null : props.value}
+    </div>
   );
 }
 
 Tile.propTypes = {
-  id: PropTypes.number.isRequired,
+  value: PropTypes.string,
   onClick: PropTypes.func.isRequired
 }
 
