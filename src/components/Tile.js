@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Tile = (props) => {
   return(
     <div onClick={props.onClick} className='tile'>
-      {props.value === 0 ? null : props.value}
+      {props.value === 0 ? null : (props.value === -1 ? 'HUMAN' : 'AI')}
     </div>
   );
 }

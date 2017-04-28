@@ -10,14 +10,75 @@ class Board extends Component {
       computerVal: 1,
       player: false,
       computer: true,
-      xIsNext: true
+      xIsNext: true,
+      aiTurn: false
+    }
+  }
+
+  componentDidUpdate(prevProps,prevState) {
+    if(!prevState.aiTurn && this.state.aiTurn){
+      this.callAI();
     }
   }
 
   handleReset = () => {
     this.setState({
-      gameState: Array(9).fill(0)
+      gameState: Array(9).fill(0),
+      aiTurn: false,
+      xIsNext: true
     });
+  }
+
+  checkFull = (tiles) => {
+    return tiles.every((item)=>{
+      return item !== 0;
+    });
+  }
+
+  callAI = () => {
+    this.aiTurn(this.state.gameState, 0, this.state.computer);
+  }
+
+  aiTurn = (tiles, depth, player) => {
+
+    if(this.calculateWinner(tiles)){
+      return -10 - depth;
+    }
+
+    if(this.checkFull(tiles)){
+      return 0;
+    }
+
+    let max = -Infinity;
+    let index = 0;
+    let value = player ? this.state.playerVal : this.state.computerVal;
+
+    for(let i = 0; i < 9; i++){
+      if(tiles[i] == 0){
+        let newGameState = tiles.slice();
+        newGameState[i] = value;
+
+        let moveVal = -this.aiTurn(newGameState, depth + 1, !player);
+
+        if(moveVal > max){
+          max = moveVal;
+          index = i;
+        }
+      }
+    }
+
+    if(depth == 0){
+      const gameState = this.state.gameState.slice();
+      gameState[index] = this.state.computerVal;
+      this.setState({
+        gameState: gameState,
+        xIsNext: !this.state.xIsNext,
+        aiTurn: false
+      })
+    }
+
+    return max;
+
   }
 
   renderTile(index) {
@@ -26,16 +87,18 @@ class Board extends Component {
 
   handleClick = (i) => {
     const gameState = this.state.gameState.slice();
-    if(this.calculateWinner(gameState) || gameState[i]){
+    if(this.calculateWinner(gameState) || (gameState[i] !== 0)){
       return;
     }
+    //debugger;
+    gameState[i] = this.state.xIsNext ? this.state.playerVal : this.state.computerVal;
 
-    gameState[i] = this.state.xIsNext ? 'X' : 'O';
-    console.log(i,gameState[i]);
     this.setState({
       gameState: gameState,
-      xIsNext: !this.state.xIsNext
+      xIsNext: !this.state.xIsNext,
+      aiTurn: true
     });
+
   }
 
   calculateWinner(tiles) {
