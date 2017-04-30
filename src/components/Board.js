@@ -36,7 +36,9 @@ class Board extends Component {
   }
 
   callAI = () => {
-    this.aiTurn(this.state.gameState, 0, this.state.computer);
+    let gameState = this.state.gameState.slice();
+    let computer = this.state.computer;
+    this.aiTurn(gameState, 0, computer);
   }
 
   aiTurn = (tiles, depth, player) => {
@@ -90,7 +92,7 @@ class Board extends Component {
     if(this.calculateWinner(gameState) || (gameState[i] !== 0)){
       return;
     }
-    //debugger;
+
     gameState[i] = this.state.xIsNext ? this.state.playerVal : this.state.computerVal;
 
     this.setState({
