@@ -7,9 +7,10 @@ const Tile = (props) => {
   let selectedO = 'selectedO';
   let unselected = 'unselected';
   let sign = value === 0 ? null : (value === -1 ? 'X' : 'O');
+  
   return(
-    <div className='tile'>
-      {sign}
+    <div className='tile' onClick={()=>{props.onTileClick(props.location)}}>
+      {value}
     </div>
   );
 }

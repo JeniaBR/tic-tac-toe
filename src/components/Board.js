@@ -6,7 +6,11 @@ const Board = (props) => {
     return(
       <div className='board-container'>
         {props.board.map((value,i)=>{
-          return <Tile key={i}/>
+          return <Tile 
+                  onTileClick={props.onTileClick} 
+                  key={i} 
+                  location={i} 
+                  value={value}/>
         })}
       </div>
     );

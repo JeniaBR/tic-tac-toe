@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Board from './Board';
 import Information from './Information';
+import Announcement from './Announcement';
 
 class Game extends Component {
   constructor(){
@@ -10,15 +11,23 @@ class Game extends Component {
         '','','',
         '','','',
         '','',''
-      ]
+      ],
+
     }
+  }
+
+  handleTileClick = (location, player) => {
+    console.log('Clicked on TILE',location);
   }
 
   render(){
     return(
-      <div className='main-container'>
-        <Board board = {this.state.gameBoard}/>
-        <Information/>
+      <div>
+        <Announcement/>
+        <div className='main-container'>
+          <Board onTileClick={this.handleTileClick} board = {this.state.gameBoard}/>
+          <Information/>
+        </div>
       </div>
     );
   }
