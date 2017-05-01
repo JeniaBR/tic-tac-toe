@@ -29,10 +29,20 @@ body {
   width: 230px;
   height: 230px;
   border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10em;
   background-color: #78bec5;
   transition: all 0.3s ease-out;
 }
 
 .tile:hover {
-  background: #262934;;
+  background: #262934;
+  opacity: 0.9;
 }
+
+.selected {
+  background-color: green;
+}
+

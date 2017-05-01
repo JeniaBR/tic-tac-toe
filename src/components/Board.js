@@ -56,7 +56,7 @@ class Board extends Component {
     let value = player ? this.state.playerVal : this.state.computerVal;
 
     for(let i = 0; i < 9; i++){
-      if(tiles[i] == 0){
+      if(tiles[i] === 0){
         let newGameState = tiles.slice();
         newGameState[i] = value;
 
@@ -69,7 +69,7 @@ class Board extends Component {
       }
     }
 
-    if(depth == 0){
+    if(depth === 0){
       const gameState = this.state.gameState.slice();
       gameState[index] = this.state.computerVal;
       this.setState({
