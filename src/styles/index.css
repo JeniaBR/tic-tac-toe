@@ -37,12 +37,18 @@ body {
   transition: all 0.3s ease-out;
 }
 
-.tile:hover {
-  background: #262934;
-  opacity: 0.9;
+.unselected {
+  background-color: #78bec5;
 }
 
-.selected {
+.unselected:hover {
+  background: #262934;
+}
+
+.selectedX {
   background-color: green;
 }
 
+.selectedO {
+  background-color: yellow;
+}

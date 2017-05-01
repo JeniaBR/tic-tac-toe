@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Board from './components/Board';
-import Information from './components/Information';
+import Game from './components/Game';
 import './styles/index.css';
 
 class App extends Component {
@@ -8,9 +7,8 @@ class App extends Component {
     return (
       <div>
         <h1 style={{textAlign: "center"}}>Welcome To my Tic-Tac-Toe :)</h1>
-        <div className='main-container'>
-          <Board/>
-          <Information/>
+        <div>
+          <Game/>
         </div>
       </div>
     );
