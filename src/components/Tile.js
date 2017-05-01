@@ -8,15 +8,14 @@ const Tile = (props) => {
   let unselected = 'unselected';
   let sign = value === 0 ? null : (value === -1 ? 'X' : 'O');
   return(
-    <div onClick={props.onClick} className={`tile ${value === 0 ? unselected : (value === -1 ? selectedX : selectedO)}`}>
+    <div className='tile'>
       {sign}
     </div>
   );
 }
 
 Tile.propTypes = {
-  value: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired
+  
 }
 
 export default Tile;

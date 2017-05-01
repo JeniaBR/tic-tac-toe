@@ -3,15 +3,21 @@ import Board from './Board';
 import Information from './Information';
 
 class Game extends Component {
-  constructor(props){
-    super(props);
-
+  constructor(){
+    super();
+    this.state = {
+      gameBoard: [
+        '','','',
+        '','','',
+        '','',''
+      ]
+    }
   }
 
   render(){
     return(
       <div className='main-container'>
-        <Board/>
+        <Board board = {this.state.gameBoard}/>
         <Information/>
       </div>
     );
