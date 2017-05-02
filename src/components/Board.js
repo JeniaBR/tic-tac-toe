@@ -10,7 +10,8 @@ const Board = (props) => {
                   onTileClick={props.onTileClick} 
                   key={i} 
                   location={i} 
-                  value={value}/>
+                  value={value}
+                  turn={props.turn}/>
         })}
       </div>
     );

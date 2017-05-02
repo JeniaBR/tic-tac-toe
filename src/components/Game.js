@@ -12,7 +12,7 @@ class Game extends Component {
         '','','',
         '','',''
       ],
-
+      turn: 'X'
     }
   }
 
@@ -25,7 +25,7 @@ class Game extends Component {
       <div>
         <Announcement/>
         <div className='main-container'>
-          <Board onTileClick={this.handleTileClick} board = {this.state.gameBoard}/>
+          <Board onTileClick={this.handleTileClick} turn={this.state.turn} board={this.state.gameBoard}/>
           <Information/>
         </div>
       </div>
