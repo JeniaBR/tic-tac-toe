@@ -12,7 +12,8 @@ class Game extends Component {
         '','','',
         '','',''
       ],
-      turn: 'X'
+      turn: 'X',
+      winner: null
     }
   }
 
@@ -20,12 +21,25 @@ class Game extends Component {
     console.log('Clicked on TILE',location);
   }
 
+  resetBoard = () => {
+    this.setState({
+      gameBoard: [
+        '','','',
+        '','','',
+        '','',''
+      ],
+      turn: 'X',
+      winner: null
+    });
+  }
+
   render(){
     return(
       <div>
-        <Announcement/>
+        <Announcement winner={this.state.winner}/>
         <div className='main-container'>
           <Board onTileClick={this.handleTileClick} turn={this.state.turn} board={this.state.gameBoard}/>
+          <button onClick={this.resetBoard}>Reset</button>
           <Information/>
         </div>
       </div>

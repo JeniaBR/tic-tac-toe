@@ -52,3 +52,7 @@ body {
 .selectedO {
   background-color: yellow;
 }
+
+.hidden {
+  display: none;
+}
