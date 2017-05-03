@@ -13,8 +13,18 @@ class Game extends Component {
         '','',''
       ],
       turn: 'X',
-      winner: null
+      winner: null,
+      maxPlayer: 'X',
+      minPlayer: 'O'
     }
+  }
+
+  isTie = (board) => {
+    const moves = board.join('').replace(/ /g, '');
+    if(moves.length === 9){
+      return true;
+    }
+    return false;
   }
 
   calculateWinner(squares) {
@@ -39,38 +49,6 @@ class Game extends Component {
     return null;
 }
 
-  handleTileClick = (location, player) => {
-    if(this.state.gameBoard[location] === 'X' || this.state.gameBoard[location] === 'O' || this.state.winner){
-      //This tile is taken already
-      return;
-    }
-    const currentGameBoard = this.state.gameBoard.slice();
-    currentGameBoard[location] = this.state.turn;
-    this.setState({
-      gameBoard: currentGameBoard,
-      turn: this.state.turn === 'X' ? 'O' : 'X'
-    });
-
-    const winner = this.calculateWinner(currentGameBoard);
-
-    if(winner){
-      this.setState({
-        winner: this.state.turn
-      })
-    }
-
-    const moves = currentGameBoard.join('').replace(/ /g, '');
-    if(moves.length === 9){
-      this.setState({
-        winner: 'd'
-      });
-    }
-
-    // this.setState({
-    //   turn: this.state.turn === 'X' ? 'O' : 'X'
-    // })
-
-  }
 
   resetBoard = () => {
     this.setState({
@@ -80,9 +58,132 @@ class Game extends Component {
         '','',''
       ],
       turn: 'X',
-      winner: null
+      winner: null,
+      maxPlayer: 'X',
+      minPlayer: 'O'
     });
   }
+
+  validMove = (move, player, board) => {
+    const newBoard = board.slice();
+    if(newBoard[move] === ''){
+      newBoard[move] = player;
+      return newBoard;
+    }else{
+      return null;
+    }
+  }
+
+  findAiMove = (board) => {
+    let bestMoveScore = 100;
+    let move = null;
+
+    if (this.calculateWinner(board) || this.isTie(board)) {
+      return null;
+    }
+
+    for (let i = 0; i < board.length; i++) {
+      let newBoard = this.validMove(i, this.state.minPlayer, board);
+      if(newBoard){
+        let moveScore = this.maxScore(newBoard);
+        if(moveScore < bestMoveScore){
+          bestMoveScore = moveScore;
+          move = i;
+        }
+      }
+    }
+    return move;
+  }
+
+  minScore = (board) => {
+    const winner = this.calculateWinner(board);
+    if(winner === 'X'){
+      return 10;
+    } else if (winner === 'O'){
+      return -10;
+    } else if(this.isTie(board)){
+      return 0;
+    } else {
+      let bestMoveValue = 100;
+      for (let i = 0; i < board.length; i++) {
+        let newBoard = this.validMove(i, this.state.minPlayer, board);
+        if(newBoard){
+          let predictedMoveValue = this.maxScore(newBoard);
+          if(predictedMoveValue < bestMoveValue){
+            bestMoveValue = predictedMoveValue;
+          }
+        }
+      }
+      return bestMoveValue;
+    }
+  }
+
+  maxScore = (board) => {
+    const winner = this.calculateWinner(board);
+    if(winner === 'X'){
+      return 10;
+    } else if (winner === 'O'){
+      return -10;
+    } else if(this.isTie(board)){
+      return 0;
+    } else {
+      let bestMoveValue = -100;
+      for (let i = 0; i < board.length; i++) {
+        let newBoard = this.validMove(i, this.state.maxPlayer, board);
+        if(newBoard){
+          let predictedMoveValue = this.minScore(newBoard);
+          if(predictedMoveValue > bestMoveValue){
+            bestMoveValue = predictedMoveValue;
+          }
+        }
+      }
+      return bestMoveValue;
+    }
+  }
+
+  handleTileClick = (location) => {
+    let player = this.state.turn;
+    let currentGameBoard = this.validMove(location, player, this.state.gameBoard);
+    if(!currentGameBoard){
+      return;
+    }
+    if(this.calculateWinner(currentGameBoard)){
+      this.setState({
+        gameBoard: currentGameBoard,
+        winner: player
+      });
+      return;
+    }
+    if(this.isTie(currentGameBoard)){
+      this.setState({
+        gameBoard: currentGameBoard,
+        winner: 'd'
+      });
+      return;
+    }
+
+    player = 'O';
+    currentGameBoard = this.validMove(this.findAiMove(currentGameBoard), player, currentGameBoard);
+    if(this.calculateWinner(currentGameBoard)){
+      this.setState({
+        gameBoard: currentGameBoard,
+        winner: player
+      });
+      return;
+    }
+    if(this.isTie(currentGameBoard)){
+      this.setState({
+        gameBoard: currentGameBoard,
+        winner: 'd'
+      });
+      return;
+    }
+
+    this.setState({
+      gameBoard: currentGameBoard
+    });
+  }
+
 
   render(){
     return(
