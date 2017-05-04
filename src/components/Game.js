@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Board from './Board';
 import Information from './Information';
 import Announcement from './Announcement';
+import SelectPlayer from './SelectPlayer';
 
 class Game extends Component {
   constructor(){
@@ -27,7 +28,7 @@ class Game extends Component {
     return false;
   }
 
-  calculateWinner(squares) {
+  calculateWinner = (squares) => {
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -49,6 +50,21 @@ class Game extends Component {
     return null;
 }
 
+  handleSelectPlayer = (selectedPlayer) => {
+    if(selectedPlayer === 'X'){
+      this.setState({
+        turn: 'X',
+        maxPlayer: 'X',
+        minPlayer: 'O'
+      });
+    } else {
+      this.setState({
+        turn: 'O',
+        maxPlayer: 'O',
+        minPlayer: 'X'
+      });
+    }
+  }
 
   resetBoard = () => {
     this.setState({
@@ -162,7 +178,7 @@ class Game extends Component {
       return;
     }
 
-    player = 'O';
+    player = this.state.minPlayer;
     currentGameBoard = this.validMove(this.findAiMove(currentGameBoard), player, currentGameBoard);
     if(this.calculateWinner(currentGameBoard)){
       this.setState({
@@ -188,7 +204,7 @@ class Game extends Component {
   render(){
     return(
       <div>
-        <Announcement winner={this.state.winner}/>
+        {this.state.winner ? <Announcement onClick={this.resetBoard} winner={this.state.winner}/> : null}
         <div className='main-container'>
           <Board onTileClick={this.handleTileClick} turn={this.state.turn} board={this.state.gameBoard}/>
           <button onClick={this.resetBoard}>Reset</button>
