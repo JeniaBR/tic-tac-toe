@@ -16,7 +16,8 @@ class Game extends Component {
       turn: 'X',
       winner: null,
       maxPlayer: 'X',
-      minPlayer: 'O'
+      minPlayer: 'O',
+      startGame: false
     }
   }
 
@@ -53,30 +54,45 @@ class Game extends Component {
   handleSelectPlayer = (selectedPlayer) => {
     if(selectedPlayer === 'X'){
       this.setState({
+        gameBoard: [
+        '','','',
+        '','','',
+        '','',''
+        ],
         turn: 'X',
+        winner: null,
         maxPlayer: 'X',
-        minPlayer: 'O'
+        minPlayer: 'O',
+        startGame: true,
       });
     } else {
       this.setState({
+        gameBoard: [
+        '','','',
+        '','','',
+        '','',''
+        ],
         turn: 'O',
+        winner: null,
         maxPlayer: 'O',
-        minPlayer: 'X'
+        minPlayer: 'X',
+        startGame: true
       });
     }
   }
 
   resetBoard = () => {
     this.setState({
-      gameBoard: [
-        '','','',
-        '','','',
-        '','',''
-      ],
-      turn: 'X',
+      // gameBoard: [
+      //   '','','',
+      //   '','','',
+      //   '','',''
+      // ],
+      // turn: 'X',
       winner: null,
-      maxPlayer: 'X',
-      minPlayer: 'O'
+      startGame: false
+      // maxPlayer: 'X',
+      // minPlayer: 'O'
     });
   }
 
@@ -205,9 +221,9 @@ class Game extends Component {
     return(
       <div>
         {this.state.winner ? <Announcement onClick={this.resetBoard} winner={this.state.winner}/> : null}
+        {!this.state.startGame ? <SelectPlayer onSelectPlayer={this.handleSelectPlayer}/> : null}
         <div className='main-container'>
           <Board onTileClick={this.handleTileClick} turn={this.state.turn} board={this.state.gameBoard}/>
-          <button onClick={this.resetBoard}>Reset</button>
           <Information/>
         </div>
       </div>
