@@ -35,6 +35,24 @@ body {
   transition: all 0.3s ease-out;
 }
 
+.button {
+    position: relative;
+    background-color: #4CAF50;
+    border-radius: 20%;
+    margin: 20px;
+    border: none;
+    font-size: 28px;
+    color: #FFFFFF;
+    padding: 20px;
+    width: auto;
+    text-align: center;
+    transition-duration: 0.4s;
+    font-family: inherit;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+
 .unselected {
   background-color: #78bec5;
 }
