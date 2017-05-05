@@ -129,9 +129,9 @@ class Game extends Component {
 
   minScore = (board) => {
     const winner = this.calculateWinner(board);
-    if(winner === 'X'){
+    if(winner === this.state.maxPlayer){
       return 10;
-    } else if (winner === 'O'){
+    } else if (winner === this.state.minPlayer){
       return -10;
     } else if(this.isTie(board)){
       return 0;
@@ -152,9 +152,9 @@ class Game extends Component {
 
   maxScore = (board) => {
     const winner = this.calculateWinner(board);
-    if(winner === 'X'){
+    if(winner === this.state.maxPlayer){
       return 10;
-    } else if (winner === 'O'){
+    } else if (winner === this.state.minPlayer){
       return -10;
     } else if(this.isTie(board)){
       return 0;
