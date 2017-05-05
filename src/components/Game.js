@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Board from './Board';
-import Information from './Information';
 import Announcement from './Announcement';
 import SelectPlayer from './SelectPlayer';
 
@@ -83,16 +82,8 @@ class Game extends Component {
 
   resetBoard = () => {
     this.setState({
-      // gameBoard: [
-      //   '','','',
-      //   '','','',
-      //   '','',''
-      // ],
-      // turn: 'X',
       winner: null,
       startGame: false
-      // maxPlayer: 'X',
-      // minPlayer: 'O'
     });
   }
 
@@ -224,7 +215,6 @@ class Game extends Component {
         {!this.state.startGame ? <SelectPlayer onSelectPlayer={this.handleSelectPlayer}/> : null}
         <div className='main-container'>
           <Board onTileClick={this.handleTileClick} turn={this.state.turn} board={this.state.gameBoard}/>
-          <Information/>
         </div>
       </div>
     );
