@@ -211,7 +211,7 @@ class Game extends Component {
   render(){
     return(
       <div>
-        {this.state.winner ? <Announcement onClick={this.resetBoard} winner={this.state.winner}/> : null}
+        {this.state.winner ? <Announcement onClick={this.resetBoard} winner={this.state.winner} minPlayer={this.state.minPlayer}/> : null}
         {!this.state.startGame ? <SelectPlayer onSelectPlayer={this.handleSelectPlayer}/> : null}
         <div className='main-container'>
           <Board onTileClick={this.handleTileClick} turn={this.state.turn} board={this.state.gameBoard}/>

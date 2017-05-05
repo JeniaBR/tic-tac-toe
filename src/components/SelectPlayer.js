@@ -5,9 +5,11 @@ const SelectPlayer = (props) => {
   return(
     <div  className='overlay'>
       <div className='overlay-content'>
-        <h1>Choose your side :)</h1>
-        <button className='button' onClick={props.onSelectPlayer.bind(null,'X')}>X</button>
-        <button className='button' onClick={props.onSelectPlayer.bind(null,'O')}>O</button>
+        <h1>Choose side:</h1>
+        <div className='select-player-container'>
+          <div onClick={props.onSelectPlayer.bind(null,'X')} className="select-tile">X</div>
+          <div onClick={props.onSelectPlayer.bind(null,'O')} className="select-tile">O</div>
+        </div>
       </div>
     </div>
   );
