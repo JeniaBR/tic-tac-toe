@@ -1,8 +1,7 @@
 import React from 'react';
 
 const Announcement = (props) => {
-  let minPlayer = props.minPlayer;
-  let winner = props.winner;
+  const {minPlayer, winner} = props;
   let message;
 
   if(minPlayer === winner){
