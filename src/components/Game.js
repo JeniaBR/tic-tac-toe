@@ -185,6 +185,10 @@ class Game extends Component {
       return;
     }
 
+    this.setState({
+      gameBoard: currentGameBoard
+    });
+
     player = this.state.minPlayer;
     currentGameBoard = this.validMove(this.findAiMove(currentGameBoard), player, currentGameBoard);
     if(this.calculateWinner(currentGameBoard)){
@@ -202,9 +206,12 @@ class Game extends Component {
       return;
     }
 
-    this.setState({
+    setTimeout(() => {
+      this.setState({
       gameBoard: currentGameBoard
     });
+    },500);
+    
   }
 
 
