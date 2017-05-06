@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 
 const SelectPlayer = (props) => {
@@ -13,6 +14,10 @@ const SelectPlayer = (props) => {
       </div>
     </div>
   );
+}
+
+SelectPlayer.propTypes = {
+  onSelectPlayer: PropTypes.func.isRequired
 }
 
 export default SelectPlayer;

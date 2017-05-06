@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Tile from './Tile';
+import PropTypes from 'prop-types';
 
 const Board = (props) => {
 
@@ -10,11 +11,15 @@ const Board = (props) => {
                   onTileClick={props.onTileClick} 
                   key={i} 
                   location={i} 
-                  value={value}
-                  turn={props.turn}/>
+                  value={value}/>
         })}
       </div>
     );
+}
+
+Board.propTypes = {
+  onTileClick: PropTypes.func.isRequired,
+  board: PropTypes.array.isRequired
 }
 
 export default Board;

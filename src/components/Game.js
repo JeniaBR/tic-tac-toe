@@ -210,7 +210,7 @@ class Game extends Component {
       this.setState({
       gameBoard: currentGameBoard
     });
-    },500);
+    },200);
     
   }
 
@@ -221,7 +221,7 @@ class Game extends Component {
         {this.state.winner ? <Announcement onClick={this.resetBoard} winner={this.state.winner} minPlayer={this.state.minPlayer}/> : null}
         {!this.state.startGame ? <SelectPlayer onSelectPlayer={this.handleSelectPlayer}/> : null}
         <div className='main-container'>
-          <Board onTileClick={this.handleTileClick} turn={this.state.turn} board={this.state.gameBoard}/>
+          <Board onTileClick={this.handleTileClick} board={this.state.gameBoard}/>
         </div>
       </div>
     );

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Announcement = (props) => {
   const {minPlayer, winner} = props;
@@ -18,6 +19,12 @@ const Announcement = (props) => {
       </div>
     </div>
   );
+}
+
+Announcement.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  winner: PropTypes.string.isRequired,
+  minPlayer: PropTypes.string.isRequired
 }
 
 export default Announcement;
